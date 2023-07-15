@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #3e2c3e;
+        }
+
+        .main {
+            height: 100vh;
+            background-size: cover !important;
+            background: url('./rm344-audi-12.jpg') no-repeat top center;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 400;
+            font-size: 60px;
+            padding-top: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown>div {
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+        }
+
+        .number {
+            font-weight: 500;
+            font-size: 44px;
+            color: #005c47;
+        }
+
+        div span:last-of-type {
+            font-size: 12px;
+        }
+
+        @media screen and (max-width:600px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .countdown>div {
+                width: 60px;
+                height: 80px;
+            }
+
+            .number {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div>
+            <h1 style="color: #444444;">Lets Get Healthy</h1>
+            <div class="countdown">
+                <!-- <div>
+                    <span class="number months"></span>
+                    <span>Months</span>
+                </div> -->
+                <div>
+                    <span class="number days"></span>
+                    <span>Days</span>
+                </div>
+                <div>
+                    <span class="number hours"></span>
+                    <span>Hours</span>
+                </div>
+                <div>
+                    <span class="number minutes"></span>
+                    <span>Minutes</span>
+                </div>
+                <div>
+                    <span class="number seconds"></span>
+                    <span>Seconds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // my next birthday
+        const newDate = new Date('sep 15 23 23:59:59').getTime()
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+        const countdown = setInterval(() => {
+
+            const date = new Date().getTime()
+            const diff = newDate - date
+
+            //const month = Math.floor((diff % (1000 * 60 * 60 * 24 * (365.25 / 12) * 365)) / (1000 * 60 * 60 * 24 * (365.25 / 12)))
+            const days = Math.floor(diff / (day))
+            const hours = Math.floor(diff % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+            document.querySelector(".seconds").innerHTML = seconds < 10 ? '' + Math.abs(seconds) : seconds
+            document.querySelector(".minutes").innerHTML = minutes < 10 ? '' + Math.abs(minutes) : minutes
+            document.querySelector(".hours").innerHTML = hours < 10 ? '' + Math.abs(hours) : hours
+            document.querySelector(".days").innerHTML = days < 10 ? '' + Math.abs(days) : days
+            //document.querySelector(".months").innerHTML = month < 10 ? '' + month : month
+
+            if (diff === 0) {
+                clearInterval(countdown)
+                document.querySelector(".countdown").innerHTML = 'Welcome to India Bujji'
+            }
+
+        }, 1000)
+    </script>
+</body>
+
+</html>
